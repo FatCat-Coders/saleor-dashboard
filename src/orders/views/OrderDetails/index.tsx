@@ -132,7 +132,6 @@ export const OrderDetails: React.FC<OrderDetailsProps> = ({ id, params }) => {
           <OrderDetailsMessages id={id} params={params}>
             {orderMessages => (
               <OrderOperations
-                  onPackagingSlipPrintClick={onPackagingSlipPrintClick}
                 order={id}
                 onNoteAdd={orderMessages.handleNoteAdd}
                 onOrderCancel={orderMessages.handleOrderCancel}
@@ -210,6 +209,7 @@ export const OrderDetails: React.FC<OrderDetailsProps> = ({ id, params }) => {
                           )}
                         />
                         <OrderDetailsPage
+                            onPackagingSlipPrintClick={onPackagingSlipPrintClick}
                           disabled={
                             updateMetadataOpts.loading ||
                             updatePrivateMetadataOpts.loading
