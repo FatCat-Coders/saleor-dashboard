@@ -98,7 +98,7 @@ export const OrderDetails: React.FC<OrderDetailsProps> = ({ id, params }) => {
 
   const handleBack = () => navigate(orderListUrl());
     const onPackagingSlipPrintClick = () => {
-                    window.open(process.env.BACKEND_API_URI + '/api/v1/orders/receipts/' + id, '_blank').focus();
+                    window.open(process.env.BACKEND_API_URI + '/api/v1/orders/packaging-slips/' + id, '_blank').focus();
         }
   return (
     <TypedOrderDetailsQuery displayLoader variables={{ id }}>
