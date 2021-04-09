@@ -26,7 +26,8 @@ const environmentPlugin = new webpack.EnvironmentPlugin({
   API_URI: "",
   APP_MOUNT_URI: "/",
   DEMO_MODE: false,
-  GTM_ID: ""
+  GTM_ID: "",
+  BACKEND_API_URI: ""
 });
 
 const dashboardBuildPath = "build/dashboard/";

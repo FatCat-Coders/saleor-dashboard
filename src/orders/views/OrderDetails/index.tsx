@@ -97,7 +97,9 @@ export const OrderDetails: React.FC<OrderDetailsProps> = ({ id, params }) => {
   >(navigate, params => orderUrl(id, params), params);
 
   const handleBack = () => navigate(orderListUrl());
-
+    const onPackagingSlipPrintClick = () => {
+                    window.open(process.env.BACKEND_API_URI + '/api/v1/orders/receipts/' + id, '_blank').focus();
+        }
   return (
     <TypedOrderDetailsQuery displayLoader variables={{ id }}>
       {({ data, loading }) => {
@@ -130,6 +132,7 @@ export const OrderDetails: React.FC<OrderDetailsProps> = ({ id, params }) => {
           <OrderDetailsMessages id={id} params={params}>
             {orderMessages => (
               <OrderOperations
+                  onPackagingSlipPrintClick={onPackagingSlipPrintClick}
                 order={id}
                 onNoteAdd={orderMessages.handleNoteAdd}
                 onOrderCancel={orderMessages.handleOrderCancel}

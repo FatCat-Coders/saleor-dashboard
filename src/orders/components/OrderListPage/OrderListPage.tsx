@@ -22,7 +22,20 @@ export interface OrderListPageProps
     FilterPageProps<OrderFilterKeys, OrderListFilterOpts>,
     SortPage<OrderListUrlSortField> {
   orders: OrderList_orders_edges_node[];
+    onBatchPrint: () => void;
 }
+import { makeStyles } from "@material-ui/core/styles";
+
+const useStyles = makeStyles(
+        () => ({
+        button: {
+            marginRight: 10,
+        }
+    }),
+    {
+        name: "OrderListPage"
+    }
+);
 
 const OrderListPage: React.FC<OrderListPageProps> = ({
   currencySymbol,
@@ -37,15 +50,22 @@ const OrderListPage: React.FC<OrderListPageProps> = ({
   onTabChange,
   onTabDelete,
   onTabSave,
+  onBatchPrint,
   ...listProps
 }) => {
   const intl = useIntl();
-
+  const classes = useStyles();
   const filterStructure = createFilterStructure(intl, filterOpts);
 
   return (
     <Container>
       <PageHeader title={intl.formatMessage(sectionNames.orders)}>
+          <Button color="primary" variant="contained" onClick={onBatchPrint} classes={{root: classes.button}}>
+                <FormattedMessage
+                    defaultMessage="Batch print all unfulfilled orders"
+                    description="button"
+                />
+          </Button>
         <Button color="primary" variant="contained" onClick={onAdd}>
           <FormattedMessage
             defaultMessage="Create order"
