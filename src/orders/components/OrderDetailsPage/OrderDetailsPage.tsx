@@ -18,7 +18,6 @@ import { UserPermissionProps } from "@saleor/types";
 import { mapMetadataItemToInput } from "@saleor/utils/maps";
 import useMetadataChangeTrigger from "@saleor/utils/metadata/useMetadataChangeTrigger";
 import React from "react";
-import { useIntl } from "react-intl";
 import { FormattedMessage, useIntl } from 'react-intl';
 import Button from "@material-ui/core/Button";
 import { maybe, renderCollection } from "../../../misc";
