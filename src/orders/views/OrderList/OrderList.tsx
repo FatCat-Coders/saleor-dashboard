@@ -39,6 +39,7 @@ import {
   saveFilterTab
 } from "./filters";
 import { getSortQueryVariables } from "./sort";
+import { getTokens } from '@saleor/auth';
 
 interface OrderListProps {
   params: OrderListUrlQueryParams;
@@ -135,7 +136,7 @@ export const OrderList: React.FC<OrderListProps> = ({ params }) => {
 
   const handleSort = createSortHandler(navigate, orderListUrl, params);
     const onBatchPrint = () => {
-              window.open(process.env.BACKEND_API_URI + '/api/v1/orders/packaging-slips', '_blank').focus();
+              window.open(process.env.BACKEND_API_URI + '/api/v1/orders/packaging-slips' +'?authToken=' + getTokens().auth, '_blank').focus();
         }
   return (
     <>

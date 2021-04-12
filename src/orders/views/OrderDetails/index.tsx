@@ -53,6 +53,7 @@ import {
 } from "../../urls";
 import OrderAddressFields from "./OrderAddressFields";
 import { OrderDetailsMessages } from "./OrderDetailsMessages";
+import { getTokens } from '@saleor/auth';
 
 interface OrderDetailsProps {
   id: string;
@@ -98,7 +99,7 @@ export const OrderDetails: React.FC<OrderDetailsProps> = ({ id, params }) => {
 
   const handleBack = () => navigate(orderListUrl());
     const onPackagingSlipPrintClick = () => {
-                    window.open(process.env.BACKEND_API_URI + '/api/v1/orders/packaging-slips/' + id, '_blank').focus();
+                    window.open(process.env.BACKEND_API_URI + '/api/v1/orders/packaging-slips/' + id + '?authToken=' + getTokens().auth , '_blank').focus();
         }
   return (
     <TypedOrderDetailsQuery displayLoader variables={{ id }}>
