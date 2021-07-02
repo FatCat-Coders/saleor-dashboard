@@ -1,3 +1,4 @@
+import { getTokens } from "@saleor/auth";
 import DeleteFilterTabDialog from "@saleor/components/DeleteFilterTabDialog";
 import SaveFilterTabDialog, {
   SaveFilterTabDialogFormData
@@ -39,7 +40,6 @@ import {
   saveFilterTab
 } from "./filters";
 import { getSortQueryVariables } from "./sort";
-import { getTokens } from '@saleor/auth';
 
 interface OrderListProps {
   params: OrderListUrlQueryParams;
@@ -135,13 +135,21 @@ export const OrderList: React.FC<OrderListProps> = ({ params }) => {
   );
 
   const handleSort = createSortHandler(navigate, orderListUrl, params);
-    const onBatchPrint = () => {
-              window.open(process.env.BACKEND_API_URI + '/api/v1/orders/packaging-slips' +'?authToken=' + getTokens().auth, '_blank').focus();
-        }
+  const onBatchPrint = () => {
+    window
+      .open(
+        process.env.BACKEND_API_URI +
+          "/api/v1/orders/packaging-slips" +
+          "?authToken=" +
+          getTokens().auth,
+        "_blank"
+      )
+      .focus();
+  };
   return (
     <>
       <OrderListPage
-          onBatchPrint={onBatchPrint}
+        onBatchPrint={onBatchPrint}
         currencySymbol={currencySymbol}
         settings={settings}
         currentTab={currentTab}

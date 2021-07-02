@@ -1,3 +1,4 @@
+import { getTokens } from "@saleor/auth";
 import { MetadataFormData } from "@saleor/components/Metadata";
 import NotFoundPage from "@saleor/components/NotFoundPage";
 import { WindowTitle } from "@saleor/components/WindowTitle";
@@ -53,7 +54,6 @@ import {
 } from "../../urls";
 import OrderAddressFields from "./OrderAddressFields";
 import { OrderDetailsMessages } from "./OrderDetailsMessages";
-import { getTokens } from '@saleor/auth';
 
 interface OrderDetailsProps {
   id: string;
@@ -98,9 +98,18 @@ export const OrderDetails: React.FC<OrderDetailsProps> = ({ id, params }) => {
   >(navigate, params => orderUrl(id, params), params);
 
   const handleBack = () => navigate(orderListUrl());
-    const onPackagingSlipPrintClick = () => {
-                    window.open(process.env.BACKEND_API_URI + '/api/v1/orders/packaging-slips/' + id + '?authToken=' + getTokens().auth , '_blank').focus();
-        }
+  const onPackagingSlipPrintClick = () => {
+    window
+      .open(
+        process.env.BACKEND_API_URI +
+          "/api/v1/orders/packaging-slips/" +
+          id +
+          "?authToken=" +
+          getTokens().auth,
+        "_blank"
+      )
+      .focus();
+  };
   return (
     <TypedOrderDetailsQuery displayLoader variables={{ id }}>
       {({ data, loading }) => {
@@ -210,7 +219,7 @@ export const OrderDetails: React.FC<OrderDetailsProps> = ({ id, params }) => {
                           )}
                         />
                         <OrderDetailsPage
-                            onPackagingSlipPrintClick={onPackagingSlipPrintClick}
+                          onPackagingSlipPrintClick={onPackagingSlipPrintClick}
                           disabled={
                             updateMetadataOpts.loading ||
                             updatePrivateMetadataOpts.loading
