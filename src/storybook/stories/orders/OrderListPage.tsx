@@ -37,6 +37,7 @@ const props: OrderListPageProps = {
       value: [OrderStatusFilter.CANCELED, OrderStatusFilter.FULFILLED]
     }
   },
+  onBatchPrint: () => undefined,
   orders,
   sort: {
     ...sortPageProps.sort,
