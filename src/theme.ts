@@ -555,21 +555,21 @@ export default (colors: IThemeColors): Theme =>
     }
   });
 
-TextField.defaultProps = {
-  ...TextField.defaultProps,
+(TextField as any).defaultProps = {
+  ...(TextField as any).defaultProps,
   variant: "outlined"
 };
 
-Card.defaultProps = {
-  ...Card.defaultProps,
+(Card as any).defaultProps = {
+  ...(Card as any).defaultProps,
   elevation: 0
 };
 
-Typography.defaultProps = {
+(Typography as any).defaultProps = {
   component: "div"
 };
 
-Checkbox.defaultProps = {
+(Checkbox as any).defaultProps = {
   checkedIcon: createElement(CheckboxCheckedIcon),
   color: "primary",
   icon: createElement(CheckboxIcon),

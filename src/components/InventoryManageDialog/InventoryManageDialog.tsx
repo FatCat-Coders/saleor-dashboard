@@ -87,9 +87,12 @@ export interface InventoryManageDialogProps {
   onClose: () => void;
 }
 
-const filterOptions = createFilterOptions({
-  stringify: option => `${option.sku} ${option.name}`,
-  limit: 10
+const filterOptions = createFilterOptions<{
+  sku: string;
+  name: string;
+}>({
+  limit: 10,
+  stringify: option => `${option.sku} ${option.name}`
 });
 
 const InventoryManageDialog: React.FC<InventoryManageDialogProps> = props => {
@@ -220,7 +223,7 @@ const InventoryManageDialog: React.FC<InventoryManageDialogProps> = props => {
     onClose();
   }, []);
 
-  const onSkuChange = useCallback((event, item) => {
+  const onSkuChange = useCallback((_, item) => {
     setProduct(item);
     if (item?.barcodes.length > 0) {
       setWarningDialogOpen(true);
@@ -235,7 +238,7 @@ const InventoryManageDialog: React.FC<InventoryManageDialogProps> = props => {
     setQuantity(event.target.value);
   }, []);
 
-  const onRemoveClick = useCallback(event => {
+  const onRemoveClick = useCallback(() => {
     setProduct(null);
     skuInput.current.querySelector("input").focus();
     skuInput.current.querySelector("input").select();
@@ -261,7 +264,7 @@ const InventoryManageDialog: React.FC<InventoryManageDialogProps> = props => {
     []
   );
 
-  const { data, loading, loadMore } = useProductListQueryWithMeta({
+  const { data, loadMore } = useProductListQueryWithMeta({
     displayLoader: true,
     variables: queryVariables
   });
@@ -278,10 +281,10 @@ const InventoryManageDialog: React.FC<InventoryManageDialogProps> = props => {
               variant.metadata
                 .find(metadata => metadata.key === "barcode")
                 ?.value?.split("|") || [],
-            productId: edge.node.id,
-            thumbnail: edge.node.thumbnail,
             name: edge.node.name,
-            productType: edge.node.productType
+            productId: edge.node.id,
+            productType: edge.node.productType,
+            thumbnail: edge.node.thumbnail
           }))
         ],
         []

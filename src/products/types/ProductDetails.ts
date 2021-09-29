@@ -190,6 +190,8 @@ export interface ProductDetails_product_variants {
   margin: number | null;
   stocks: (ProductDetails_product_variants_stocks | null)[] | null;
   trackInventory: boolean;
+  metadata?: (ProductDetails_product_metadata | null)[];
+  weight?: ProductDetails_product_weight;
 }
 
 export interface ProductDetails_product_weight {
