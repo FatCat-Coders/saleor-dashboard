@@ -1,3 +1,4 @@
+import Button from "@material-ui/core/Button";
 import { makeStyles } from "@material-ui/core/styles";
 import Typography from "@material-ui/core/Typography";
 import AppHeader from "@saleor/components/AppHeader";
@@ -18,8 +19,8 @@ import { UserPermissionProps } from "@saleor/types";
 import { mapMetadataItemToInput } from "@saleor/utils/maps";
 import useMetadataChangeTrigger from "@saleor/utils/metadata/useMetadataChangeTrigger";
 import React from "react";
-import { FormattedMessage, useIntl } from 'react-intl';
-import Button from "@material-ui/core/Button";
+import { FormattedMessage, useIntl } from "react-intl";
+
 import { maybe, renderCollection } from "../../../misc";
 import { OrderStatus } from "../../../types/globalTypes";
 import { OrderDetails_order } from "../../types/OrderDetails";
@@ -102,7 +103,7 @@ const OrderDetailsPage: React.FC<OrderDetailsPageProps> = props => {
     onInvoiceGenerate,
     onInvoiceSend,
     onSubmit,
-    onPackagingSlipPrintClick,
+    onPackagingSlipPrintClick
   } = props;
   const classes = useStyles(props);
 
@@ -222,13 +223,17 @@ const OrderDetailsPage: React.FC<OrderDetailsPageProps> = props => {
                 />
               </div>
               <div>
-                  <Button color="primary" variant="contained" onClick={onPackagingSlipPrintClick}>
-                                      <FormattedMessage
-                                          defaultMessage="Print packaging slip"
-                                          description="button"
-                                      />
-                                 </Button>
-                                  <CardSpacer />
+                <Button
+                  color="primary"
+                  variant="contained"
+                  onClick={onPackagingSlipPrintClick}
+                >
+                  <FormattedMessage
+                    defaultMessage="Print packaging slip"
+                    description="button"
+                  />
+                </Button>
+                <CardSpacer />
                 <OrderCustomer
                   canEditAddresses={canEditAddresses}
                   canEditCustomer={false}
