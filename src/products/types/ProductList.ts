@@ -3,6 +3,7 @@
 // This file was automatically generated and should not be edited.
 
 import { ProductFilterInput, ProductOrder } from "./../../types/globalTypes";
+import { ProductDetails_product_variants } from "./ProductDetails";
 
 // ====================================================
 // GraphQL query operation: ProductList
@@ -70,6 +71,12 @@ export interface ProductList_products_edges_node_pricing {
   priceRangeUndiscounted: ProductList_products_edges_node_pricing_priceRangeUndiscounted | null;
 }
 
+export interface App_app_privateMetadata {
+  __typename: "MetadataItem";
+  key: string;
+  value: string;
+}
+
 export interface ProductList_products_edges_node {
   __typename: "Product";
   id: string;
@@ -80,6 +87,8 @@ export interface ProductList_products_edges_node {
   productType: ProductList_products_edges_node_productType;
   attributes: ProductList_products_edges_node_attributes[];
   pricing: ProductList_products_edges_node_pricing | null;
+  metadata?: (App_app_privateMetadata | null)[];
+  variants?: (ProductDetails_product_variants)[];
 }
 
 export interface ProductList_products_edges {

@@ -87,6 +87,7 @@ export interface PageListProps<TColumns extends string = string>
   extends ListProps<TColumns> {
   defaultSettings?: ListSettings<TColumns>;
   onAdd: () => void;
+  onInventoryManage?: () => void;
 }
 
 export interface SearchProps {

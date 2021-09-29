@@ -4,6 +4,7 @@ import IconButton from "@material-ui/core/IconButton";
 import DeleteIcon from "@material-ui/icons/Delete";
 import ActionDialog from "@saleor/components/ActionDialog";
 import DeleteFilterTabDialog from "@saleor/components/DeleteFilterTabDialog";
+import InventoryManageDialog from "@saleor/components/InventoryManageDialog";
 import SaveFilterTabDialog, {
   SaveFilterTabDialogFormData
 } from "@saleor/components/SaveFilterTabDialog";
@@ -345,6 +346,9 @@ export const ProductList: React.FC<ProductListProps> = ({ params }) => {
           false
         )}
         onAdd={() => navigate(productAddUrl)}
+        onInventoryManage={() => {
+          openModal("inventory");
+        }}
         disabled={loading}
         products={maybe(() => data.products.edges.map(edge => edge.node))}
         onFetchMore={() =>
@@ -431,6 +435,10 @@ export const ProductList: React.FC<ProductListProps> = ({ params }) => {
         initialSearch={params.query || ""}
         tabs={getFilterTabs().map(tab => tab.name)}
         onExport={() => openModal("export")}
+      />
+      <InventoryManageDialog
+        open={params.action === "inventory"}
+        onClose={closeModal}
       />
       <ActionDialog
         open={params.action === "delete"}

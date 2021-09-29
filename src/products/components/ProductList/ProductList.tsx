@@ -45,6 +45,9 @@ const useStyles = makeStyles(
       colPublished: {
         width: 200
       },
+      colQuantity: {
+        width: 200
+      },
       colType: {
         width: 200
       }
@@ -73,6 +76,9 @@ const useStyles = makeStyles(
     },
     colPublished: {},
     colType: {},
+    light: {
+      fontWeight: 200
+    },
     link: {
       cursor: "pointer"
     },
@@ -127,7 +133,6 @@ export const ProductList: React.FC<ProductListProps> = props => {
     onRowClick,
     onSort
   } = props;
-
   const classes = useStyles(props);
   const intl = useIntl();
 
@@ -198,6 +203,9 @@ export const ProductList: React.FC<ProductListProps> = props => {
           ))}
           <DisplayColumn column="price" displayColumns={settings.columns}>
             <col className={classes.colPrice} />
+          </DisplayColumn>
+          <DisplayColumn column="quantity" displayColumns={settings.columns}>
+            <col className={classes.colQuantity} />
           </DisplayColumn>
         </colgroup>
         <TableHead
@@ -299,6 +307,14 @@ export const ProductList: React.FC<ProductListProps> = props => {
               <FormattedMessage
                 defaultMessage="Price"
                 description="product price"
+              />
+            </TableCellHeader>
+          </DisplayColumn>
+          <DisplayColumn column="quantity" displayColumns={settings.columns}>
+            <TableCellHeader className={classes.colQuantity} textAlign="right">
+              <FormattedMessage
+                defaultMessage="Stock Quantity"
+                description="stock quantity"
               />
             </TableCellHeader>
           </DisplayColumn>
@@ -445,6 +461,27 @@ export const ProductList: React.FC<ProductListProps> = props => {
                   >
                     <TableCell className={classes.colPrice}>
                       {loading ? <Skeleton /> : getProductPrice(product)}
+                    </TableCell>
+                  </DisplayColumn>
+                  <DisplayColumn
+                    column="quantity"
+                    displayColumns={settings.columns}
+                  >
+                    <TableCell className={classes.colPrice}>
+                      {loading ? (
+                        <Skeleton />
+                      ) : (
+                        <>
+                          {product.variants.map(variant => (
+                            <div>
+                              <span className={classes.light}>
+                                {variant.sku}:
+                              </span>{" "}
+                              {variant.stocks?.[0].quantity}
+                            </div>
+                          ))}
+                        </>
+                      )}
                     </TableCell>
                   </DisplayColumn>
                 </TableRow>

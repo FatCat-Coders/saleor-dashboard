@@ -24,6 +24,7 @@ export type ProductListUrlDialog =
   | "unpublish"
   | "delete"
   | "export"
+  | "inventory"
   | TabActionDialog;
 export enum ProductListUrlFiltersEnum {
   priceFrom = "priceFrom",

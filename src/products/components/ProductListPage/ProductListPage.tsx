@@ -50,6 +50,9 @@ export interface ProductListPageProps
 
 const useStyles = makeStyles(
   theme => ({
+    buttonSpacing: {
+      margin: theme.spacing(0, 0, 0, 3)
+    },
     columnPicker: {
       margin: theme.spacing(0, 3)
     }
@@ -72,6 +75,7 @@ export const ProductListPage: React.FC<ProductListPageProps> = props => {
     tabs,
     totalGridAttributes,
     onAdd,
+    onInventoryManage,
     onAll,
     onExport,
     onFetchMore,
@@ -112,6 +116,13 @@ export const ProductListPage: React.FC<ProductListPageProps> = props => {
         description: "product type"
       }),
       value: "productType" as ProductListColumns
+    },
+    {
+      label: intl.formatMessage({
+        defaultMessage: "Stock Quantity",
+        description: "stockQuantity"
+      }),
+      value: "stockQuantity" as ProductListColumns
     },
     ...availableInGridAttributes.map(attribute => ({
       label: attribute.name,
@@ -160,6 +171,15 @@ export const ProductListPage: React.FC<ProductListPageProps> = props => {
             defaultMessage="Create Product"
             description="button"
           />
+        </Button>
+        <Button
+          className={classes.buttonSpacing}
+          onClick={onInventoryManage}
+          color="primary"
+          variant="contained"
+          data-test="inventory"
+        >
+          <FormattedMessage defaultMessage="Inventory" description="button" />
         </Button>
       </PageHeader>
       <Card>

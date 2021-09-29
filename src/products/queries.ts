@@ -9,6 +9,7 @@ import {
 import { taxTypeFragment } from "@saleor/fragments/taxes";
 import { warehouseFragment } from "@saleor/fragments/warehouses";
 import makeQuery from "@saleor/hooks/makeQuery";
+import ApolloClient from "apollo-client";
 import gql from "graphql-tag";
 
 import { CountAllProducts } from "./types/CountAllProducts";
@@ -124,6 +125,16 @@ const productListQuery = gql`
               name
             }
           }
+          variants {
+            id
+            sku
+            stocks {
+              warehouse {
+                id
+              }
+              quantity
+            }
+          }
           pricing {
             priceRangeUndiscounted {
               start {
@@ -153,6 +164,71 @@ const productListQuery = gql`
 export const useProductListQuery = makeQuery<ProductList, ProductListVariables>(
   productListQuery
 );
+const productListQueryWithMeta = gql`
+  ${productFragment}
+  query ProductList(
+    $first: Int
+    $after: String
+    $last: Int
+    $before: String
+    $filter: ProductFilterInput
+    $sort: ProductOrder
+  ) {
+    products(
+      before: $before
+      after: $after
+      first: $first
+      last: $last
+      filter: $filter
+      sortBy: $sort
+    ) {
+      edges {
+        node {
+          ...ProductFragment
+          variants {
+            id
+            sku
+            attributes {
+              attribute {
+                id
+                name
+                metadata {
+                  key
+                  value
+                }
+              }
+              values {
+                id
+                name
+              }
+            }
+            stocks {
+              warehouse {
+                id
+              }
+              quantity
+            }
+            metadata {
+              key
+              value
+            }
+          }
+        }
+      }
+      pageInfo {
+        hasPreviousPage
+        hasNextPage
+        startCursor
+        endCursor
+      }
+      totalCount
+    }
+  }
+`;
+export const useProductListQueryWithMeta = makeQuery<
+  ProductList,
+  ProductListVariables
+>(productListQueryWithMeta);
 
 const countAllProductsQuery = gql`
   query CountAllProducts {
@@ -194,6 +270,17 @@ export const useProductVariantQuery = makeQuery<
   ProductVariantDetails,
   ProductVariantDetailsVariables
 >(productVariantQuery);
+
+export const fetchProductVariant = (
+  apolloClient: ApolloClient<object>,
+  id: string
+) =>
+  apolloClient.query<ProductVariantDetails, ProductVariantDetailsVariables>({
+    query: productVariantQuery,
+    variables: {
+      id
+    }
+  });
 
 const productVariantCreateQuery = gql`
   query ProductVariantCreateData($id: ID!) {
