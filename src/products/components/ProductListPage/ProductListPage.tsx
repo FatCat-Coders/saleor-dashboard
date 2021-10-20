@@ -120,9 +120,9 @@ export const ProductListPage: React.FC<ProductListPageProps> = props => {
     {
       label: intl.formatMessage({
         defaultMessage: "Stock Quantity",
-        description: "stockQuantity"
+        description: "quantity"
       }),
-      value: "stockQuantity" as ProductListColumns
+      value: "quantity" as ProductListColumns
     },
     ...availableInGridAttributes.map(attribute => ({
       label: attribute.name,

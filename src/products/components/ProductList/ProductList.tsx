@@ -467,7 +467,7 @@ export const ProductList: React.FC<ProductListProps> = props => {
                     column="quantity"
                     displayColumns={settings.columns}
                   >
-                    <TableCell className={classes.colPrice}>
+                    <TableCell className={classes.colQuantity}>
                       {loading ? (
                         <Skeleton />
                       ) : (
@@ -477,7 +477,7 @@ export const ProductList: React.FC<ProductListProps> = props => {
                               <span className={classes.light}>
                                 {variant.sku}:
                               </span>{" "}
-                              {variant.stocks?.[0].quantity}
+                              {variant.stocks?.[0]?.quantity}
                             </div>
                           ))}
                         </>
