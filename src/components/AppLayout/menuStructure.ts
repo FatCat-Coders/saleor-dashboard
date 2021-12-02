@@ -95,7 +95,16 @@ function createMenuStructure(intl: IntlShape): IMenuItem[] {
       testingContextId: "customers",
       url: customerListUrl()
     },
+    // {
+    //   ariaLabel: "affiliate",
+    //   children: [
 
+    //   ],
+    //   icon: customerIcon,
+    //   label: intl.formatMessage(sectionNames.affiliate),
+    //   permission: PermissionEnum.MANAGE_USERS,
+    //   testingContextId: "affiliate",
+    // },
     {
       ariaLabel: "discounts",
       children: [

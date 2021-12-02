@@ -167,6 +167,10 @@ export const buttonMessages = defineMessages({
 });
 
 export const sectionNames = defineMessages({
+  affiliate: {
+    defaultMessage: "Affiliate",
+    description: "affiliate section name"
+  },
   apps: {
     defaultMessage: "Apps",
     description: "apps section name"

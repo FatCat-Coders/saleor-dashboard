@@ -570,7 +570,7 @@ const InventoryManageDialog: React.FC<InventoryManageDialogProps> = props => {
           color={mode === "add" ? "primary" : "secondary"}
           variant="contained"
           type="submit"
-          onClick={() => updateStocks}
+          onClick={updateStocks}
           disabled={
             mainLoading ||
             !quantity ||

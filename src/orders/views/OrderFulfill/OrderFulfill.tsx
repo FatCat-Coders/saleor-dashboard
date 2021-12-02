@@ -26,7 +26,7 @@ const OrderFulfill: React.FC<OrderFulfillProps> = ({ orderId }) => {
   const { data: warehouseData, loading: warehousesLoading } = useWarehouseList({
     displayLoader: true,
     variables: {
-      first: 20
+      first: 100
     }
   });
   const [fulfillOrder, fulfillOrderOpts] = useOrderFulfill({
